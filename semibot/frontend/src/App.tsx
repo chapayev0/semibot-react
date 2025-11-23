@@ -1,27 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Input, Badge, Button, Card, Tag } from 'antd';
-import {
-  AppstoreOutlined,
-  SearchOutlined,
-  SwapOutlined,
-  BuildOutlined,
-  LinkOutlined,
-  AimOutlined,
-  RightOutlined,
-  DownOutlined,
-  PlayCircleOutlined,
-  SyncOutlined,
-  CloudUploadOutlined,
-  ThunderboltOutlined,
-  CheckCircleOutlined,
-  QuestionCircleOutlined,
-  MessageOutlined,
-  EditOutlined,
-  CodeOutlined,
-  FileTextOutlined,
-  BarChartOutlined,
-  PaperClipOutlined,
-} from '@ant-design/icons';
+import * as Icons from "@ant-design/icons";
+import './App.css';
 
 const { Sider, Content, Header } = Layout;
 
@@ -40,25 +20,7 @@ const FlowNode: React.FC<FlowNodeProps> = ({
   label, 
   size = 'md' 
 }) => (
-  <div style={{
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: size === 'sm' ? '6px 12px' : '10px 16px',
-    background: 
-      color === 'purple' ? '#722ed1' : 
-      color === 'teal' ? '#13c2c2' : 
-      color === 'brown' ? '#8c6239' : 
-      color === 'white' ? '#fff' : 
-      '#1890ff',
-    color: color === 'white' ? '#333' : '#fff',
-    borderRadius: '8px',
-    border: color === 'white' ? '2px solid #d9d9d9' : 'none',
-    fontSize: size === 'sm' ? '13px' : '14px',
-    fontWeight: 500,
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-    whiteSpace: 'nowrap' as const,
-  }}>
+  <div className={`flow-node flow-node-${color} flow-node-${size}`}>
     {icon}
     {label || children}
   </div>
@@ -70,74 +32,74 @@ function App() {
   const menuItems = [
     {
       key: 'campilation',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Campilation',
     },
     {
       key: 'basic',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Basic',
     },
     {
       key: 'redirections',
-      icon: <DownOutlined />,
+      icon: <Icons.DownOutlined />,
       label: 'Redirections',
       children: [
         {
           key: 'prescribing',
-          icon: <CodeOutlined />,
+          icon: <Icons.CodeOutlined />,
           label: 'Prescribing',
         },
         {
           key: 'swapping',
-          icon: <SwapOutlined />,
+          icon: <Icons.SwapOutlined />,
           label: 'Swapping',
         },
         {
           key: 'building-blocks',
-          icon: <BuildOutlined />,
+          icon: <Icons.BuildOutlined />,
           label: 'Building blocks',
         },
         {
           key: 'magnet-link',
-          icon: <LinkOutlined />,
+          icon: <Icons.LinkOutlined />,
           label: 'Magnet link',
         },
         {
           key: 'retargeting',
-          icon: <AimOutlined />,
+          icon: <Icons.AimOutlined />,
           label: 'Retargeting',
         },
       ],
     },
     {
       key: 'telephony',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Telephony',
     },
     {
       key: 'coding',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Coding',
     },
     {
       key: 'file-managing',
-      icon: <DownOutlined />,
+      icon: <Icons.DownOutlined />,
       label: 'File managing',
       children: [
         {
           key: 'primary-entry',
-          icon: <FileTextOutlined />,
+          icon: <Icons.FileTextOutlined />,
           label: 'Primary entry',
         },
         {
           key: 'file-analysis',
-          icon: <BarChartOutlined />,
+          icon: <Icons.BarChartOutlined />,
           label: 'File analysis',
         },
         {
           key: 'attachment',
-          icon: <PaperClipOutlined />,
+          icon: <Icons.PaperClipOutlined />,
           label: 'Attachment',
         },
       ],
@@ -145,139 +107,57 @@ function App() {
   ];
 
   return (
-    <Layout style={{ height: '100vh', width: '100%' }}>
-      <Header 
-        style={{ 
-          background: '#001529', 
-          padding: '0 20px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px'
-        }}
-      >
-        <div style={{ 
-          color: '#fff', 
-          fontSize: '18px', 
-          fontWeight: 600, 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '8px' 
-        }}>
-          <AppstoreOutlined />
+    <Layout className="app-layout">
+      <Header className="app-header">
+        <div className="app-logo">
+          <Icons.AppstoreOutlined />
           logflow
         </div>
 
-        
         {/* Window Controls - Right Side */}
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0' }}>
+        <div className="window-controls">
           <Button 
             type="text" 
-            icon={<span style={{ fontSize: '16px' }}>−</span>}
-            style={{ 
-              color: '#fff', 
-              width: 46, 
-              height: 64,
-              borderRadius: 0
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+            icon={<span className="window-icon">−</span>}
+            className="window-btn window-minimize"
           />
           <Button 
             type="text" 
-            icon={<span style={{ fontSize: '16px' }}>□</span>}
-            style={{ 
-              color: '#fff', 
-              width: 46, 
-              height: 64,
-              borderRadius: 0
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+            icon={<span className="window-icon">□</span>}
+            className="window-btn window-restore"
           />
           <Button 
             type="text" 
-            icon={<span style={{ fontSize: '16px' }}>×</span>}
-            style={{ 
-              color: '#fff', 
-              width: 46, 
-              height: 64,
-              borderRadius: 0
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#e81123'}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+            icon={<span className="window-icon">×</span>}
+            className="window-btn window-close"
           />
         </div>
       </Header>
       
       <Layout>
         {/* Left Vertical Toolbar */}
-        <Sider
-          width={50}
-          style={{
-            background: '#001529',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '16px 0',
-            gap: '16px'
-          }}
-          collapsible={false}
-        >
-          <Button 
-            type="text" 
-            icon={<AppstoreOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
-          <Button 
-            type="text" 
-            icon={<BuildOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
-          <Button 
-            type="text" 
-            icon={<FileTextOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
-          <Button 
-            type="text" 
-            icon={<MessageOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
-          <Button 
-            type="text" 
-            icon={<BarChartOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
-          <Button 
-            type="text" 
-            icon={<CodeOutlined />} 
-            style={{ color: '#fff', width: 40, height: 40 }}
-          />
+        <Sider className="vertical-toolbar" width={60} collapsible={false}>
+          <Button type="text" icon={<Icons.AppstoreOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<Icons.BuildOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<Icons.FileTextOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<Icons.MessageOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<Icons.BarChartOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<Icons.CodeOutlined />} className="toolbar-btn" />
         </Sider>
 
         {/* Left Side Panel */}
-        <Sider 
-          width={300} 
-          style={{ 
-            background: '#fff', 
-            borderRight: '1px solid #f0f0f0',
-            overflow: 'auto' 
-          }}
-          collapsible={false}
-        >
-          <div style={{ padding: '16px' }}>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <Sider className="side-panel" width={300} collapsible={false}>
+          <div className="side-panel-content">
+            <div className="side-panel-header">
               <Button type="text">OBJECTIVES</Button>
               <Button type="primary">ASSETS</Button>
-              <Button type="text">
-                1 <DownOutlined />
-              </Button>
+              <Button type="text">1 <Icons.DownOutlined /></Button>
             </div>
             
             <Input 
-              prefix={<SearchOutlined />} 
+              prefix={<Icons.SearchOutlined />} 
               placeholder="Find..." 
-              style={{ marginBottom: '16px' }}
+              className="search-input"
             />
             
             <Menu
@@ -285,19 +165,12 @@ function App() {
               defaultSelectedKeys={['primary-entry']}
               defaultOpenKeys={['redirections', 'file-managing']}
               items={menuItems}
-              style={{ border: 'none' }}
+              className="side-menu"
             />
           </div>
         </Sider>
         
-        <Content 
-          style={{ 
-            padding: '24px', 
-            background: '#f5f5f7',
-            overflow: 'auto',
-            position: 'relative'
-          }}
-        >
+        <Content className="main-content">
           {/* Empty Canvas - Add your content here */}
         </Content>
       </Layout>

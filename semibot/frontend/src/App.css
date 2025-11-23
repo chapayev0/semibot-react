@@ -36,3 +36,340 @@
     transform: rotate(360deg);
   }
 }
+/* Color Palette - Modern Minimal Theme */
+:root {
+  /* Primary Colors */
+  --primary-bg: #F5F5F5;           /* Dark slate for header/toolbar */
+  --primary-hover: #1e293b;        /* Hover state */
+  --primary-active: #334155;       /* Active state */
+  
+  /* Accent Colors */
+  --accent-primary: #3b82f6;       /* Blue accent */
+  --accent-secondary: #8b5cf6;     /* Purple accent */
+  --accent-success: #10b981;       /* Green accent */
+  --accent-warning: #f59e0b;       /* Orange accent */
+  --accent-danger: #ef4444;        /* Red accent */
+  
+  /* Neutral Colors */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  
+  /* Text Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-inverse: #ffffff;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  
+  /* Border Colors */
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout */
+.app-layout {
+  height: 100vh;
+  width: 100%;
+}
+
+/* Header */
+.app-header {
+  background: var(--primary-bg);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--primary-hover);
+}
+
+.app-logo {
+  color: var(--text-inverse);
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Window Controls */
+.window-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 0;
+}
+
+.window-btn {
+  color: var(--text-inverse);
+  width: 46px;
+  height: 64px;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+
+.window-icon {
+  font-size: 16px;
+}
+
+.window-minimize:hover {
+  background: var(--primary-hover) !important;
+}
+
+.window-restore:hover {
+  background: var(--primary-hover) !important;
+}
+
+.window-close:hover {
+  background: var(--accent-danger) !important;
+}
+
+/* Vertical Toolbar */
+.vertical-toolbar {
+  background: var(--primary-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 16px;
+  border-right: 1px solid var(--primary-hover);
+}
+
+.toolbar-btn {
+  color: var(--neutral-400);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+  color: var(--text-inverse) !important;
+  background: var(--primary-hover) !important;
+}
+
+.toolbar-btn:active,
+.toolbar-btn.active {
+  color: var(--accent-primary) !important;
+  background: var(--primary-active) !important;
+}
+
+/* Side Panel */
+.side-panel {
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-light);
+  overflow: auto;
+}
+
+.side-panel-content {
+  padding: 16px;
+}
+
+.side-panel-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.side-panel-header .ant-btn-text {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.side-panel-header .ant-btn-primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.side-panel-header .ant-btn-primary:hover {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+.search-input {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border-color: var(--border-light);
+}
+
+.search-input:hover {
+  border-color: var(--accent-primary);
+}
+
+.search-input:focus,
+.search-input:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.side-menu {
+  border: none;
+}
+
+.side-menu .ant-menu-item {
+  border-radius: 6px;
+  margin: 4px 0;
+  color: var(--text-secondary);
+}
+
+.side-menu .ant-menu-item:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.side-menu .ant-menu-item-selected {
+  background: var(--bg-secondary);
+  color: var(--accent-primary);
+}
+
+.side-menu .ant-menu-submenu-title {
+  border-radius: 6px;
+  margin: 4px 0;
+  color: var(--text-secondary);
+}
+
+.side-menu .ant-menu-submenu-title:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+/* Main Content */
+.main-content {
+  padding: 24px;
+  background: var(--bg-secondary);
+  overflow: auto;
+  position: relative;
+}
+
+/* Tags - Override Ant Design colors */
+.ant-tag {
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 10px;
+}
+
+.app-header .ant-tag {
+  border: none;
+}
+
+/* Flow Node Component */
+.flow-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.flow-node:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.flow-node-md {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.flow-node-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.flow-node-purple {
+  background: var(--accent-secondary);
+  color: var(--text-inverse);
+}
+
+.flow-node-teal {
+  background: var(--accent-success);
+  color: var(--text-inverse);
+}
+
+.flow-node-brown {
+  background: var(--accent-warning);
+  color: var(--text-inverse);
+}
+
+.flow-node-white {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-light);
+}
+
+.flow-node-blue {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+/* Cards */
+.ant-card {
+  border-radius: 12px;
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.ant-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Buttons */
+.ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.ant-btn-primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.ant-btn-primary:hover {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+/* Scrollbar Styling */
+.side-panel::-webkit-scrollbar,
+.main-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.side-panel::-webkit-scrollbar-track,
+.main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.side-panel::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 3px;
+}
+
+.side-panel::-webkit-scrollbar-thumb:hover,
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
+}
