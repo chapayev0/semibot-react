@@ -49,6 +49,7 @@ const FlowNode: React.FC<FlowNodeProps> = ({
 
 function App() {
   const [collapsed, setCollapsed] = useState(false);
+  const [activePage, setActivePage] = useState<string>('page1');
 
   const menuItems = [
     {
@@ -158,13 +159,45 @@ function App() {
       
       <Layout>
         {/* Left Vertical Toolbar */}
-        <Sider className="vertical-toolbar" width={50} collapsible={false}>
-          <Button type="text" icon={<AppstoreOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<BuildOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<FileTextOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<MessageOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<BarChartOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<CodeOutlined />} className="toolbar-btn" />
+        <Sider className="vertical-toolbar" width={56} collapsible={false}>
+          <div className="toolbar-column">
+            <Button
+              type="text"
+              icon={<AppstoreOutlined />}
+              className={`toolbar-btn ${activePage === 'page1' ? 'active' : ''}`}
+              onClick={() => setActivePage('page1')}
+            />
+            <Button
+              type="text"
+              icon={<BuildOutlined />}
+              className={`toolbar-btn ${activePage === 'page2' ? 'active' : ''}`}
+              onClick={() => setActivePage('page2')}
+            />
+            <Button
+              type="text"
+              icon={<FileTextOutlined />}
+              className={`toolbar-btn ${activePage === 'page3' ? 'active' : ''}`}
+              onClick={() => setActivePage('page3')}
+            />
+            <Button
+              type="text"
+              icon={<MessageOutlined />}
+              className={`toolbar-btn ${activePage === 'page4' ? 'active' : ''}`}
+              onClick={() => setActivePage('page4')}
+            />
+            <Button
+              type="text"
+              icon={<BarChartOutlined />}
+              className={`toolbar-btn ${activePage === 'page5' ? 'active' : ''}`}
+              onClick={() => setActivePage('page5')}
+            />
+            <Button
+              type="text"
+              icon={<CodeOutlined />}
+              className={`toolbar-btn ${activePage === 'page6' ? 'active' : ''}`}
+              onClick={() => setActivePage('page6')}
+            />
+          </div>
         </Sider>
 
         {/* Left Side Panel */}
@@ -188,7 +221,57 @@ function App() {
         </Sider>
         
         <Content className="main-content">
-          {/* Empty Canvas - Add your content here */}
+          {/* Central canvas: render different widgets depending on activePage */}
+          {activePage === 'page1' && (
+            <div className="canvas-page">
+              <Card title="Page 1 - Overview" style={{ width: 600 }}>
+                <p>This is page 1. Use the toolbar to switch pages.</p>
+                <Tag color="blue">Widget A</Tag>
+                <Tag color="green">Widget B</Tag>
+              </Card>
+            </div>
+          )}
+
+          {activePage === 'page2' && (
+            <div className="canvas-page">
+              <Card title="Page 2 - Build" style={{ width: 600 }}>
+                <p>This is page 2. Build related widgets go here.</p>
+                <Button type="primary">Run build</Button>
+              </Card>
+            </div>
+          )}
+
+          {activePage === 'page3' && (
+            <div className="canvas-page">
+              <Card title="Page 3 - Documents" style={{ width: 600 }}>
+                <p>List of documents and entries.</p>
+              </Card>
+            </div>
+          )}
+
+          {activePage === 'page4' && (
+            <div className="canvas-page">
+              <Card title="Page 4 - Messages" style={{ width: 600 }}>
+                <p>Message center widget.</p>
+              </Card>
+            </div>
+          )}
+
+          {activePage === 'page5' && (
+            <div className="canvas-page">
+              <Card title="Page 5 - Analytics" style={{ width: 600 }}>
+                <p>Analytics charts and KPIs.</p>
+              </Card>
+            </div>
+          )}
+
+          {activePage === 'page6' && (
+            <div className="canvas-page">
+              <Card title="Page 6 - Code" style={{ width: 600 }}>
+                <pre style={{ whiteSpace: 'pre-wrap' }}>{`// sample code widget\nconsole.log('Page 6');`}</pre>
+              </Card>
+            </div>
+          )}
         </Content>
       </Layout>
     </Layout>

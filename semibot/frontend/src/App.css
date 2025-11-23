@@ -140,3 +140,32 @@
   background: #1890ff;
   color: #fff;
 }
+
+/* Toolbar column layout and active state */
+.toolbar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.toolbar-btn {
+  width: 40px;
+  height: 40px;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-btn.active {
+  background: #e6f7ff !important;
+  color: #1890ff !important;
+}
+
+.canvas-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px;
+}
