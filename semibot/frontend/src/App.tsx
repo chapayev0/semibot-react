@@ -1,6 +1,27 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Input, Badge, Button, Card, Tag } from 'antd';
-import * as Icons from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  SearchOutlined,
+  SwapOutlined,
+  BuildOutlined,
+  LinkOutlined,
+  AimOutlined,
+  RightOutlined,
+  DownOutlined,
+  PlayCircleOutlined,
+  SyncOutlined,
+  CloudUploadOutlined,
+  ThunderboltOutlined,
+  CheckCircleOutlined,
+  QuestionCircleOutlined,
+  MessageOutlined,
+  EditOutlined,
+  CodeOutlined,
+  FileTextOutlined,
+  BarChartOutlined,
+  PaperClipOutlined,
+} from '@ant-design/icons';
 import './App.css';
 
 const { Sider, Content, Header } = Layout;
@@ -32,74 +53,74 @@ function App() {
   const menuItems = [
     {
       key: 'campilation',
-      icon: <Icons.RightOutlined />,
+      icon: <RightOutlined />,
       label: 'Campilation',
     },
     {
       key: 'basic',
-      icon: <Icons.RightOutlined />,
+      icon: <RightOutlined />,
       label: 'Basic',
     },
     {
       key: 'redirections',
-      icon: <Icons.DownOutlined />,
+      icon: <DownOutlined />,
       label: 'Redirections',
       children: [
         {
           key: 'prescribing',
-          icon: <Icons.CodeOutlined />,
+          icon: <CodeOutlined />,
           label: 'Prescribing',
         },
         {
           key: 'swapping',
-          icon: <Icons.SwapOutlined />,
+          icon: <SwapOutlined />,
           label: 'Swapping',
         },
         {
           key: 'building-blocks',
-          icon: <Icons.BuildOutlined />,
+          icon: <BuildOutlined />,
           label: 'Building blocks',
         },
         {
           key: 'magnet-link',
-          icon: <Icons.LinkOutlined />,
+          icon: <LinkOutlined />,
           label: 'Magnet link',
         },
         {
           key: 'retargeting',
-          icon: <Icons.AimOutlined />,
+          icon: <AimOutlined />,
           label: 'Retargeting',
         },
       ],
     },
     {
       key: 'telephony',
-      icon: <Icons.RightOutlined />,
+      icon: <RightOutlined />,
       label: 'Telephony',
     },
     {
       key: 'coding',
-      icon: <Icons.RightOutlined />,
+      icon: <RightOutlined />,
       label: 'Coding',
     },
     {
       key: 'file-managing',
-      icon: <Icons.DownOutlined />,
+      icon: <DownOutlined />,
       label: 'File managing',
       children: [
         {
           key: 'primary-entry',
-          icon: <Icons.FileTextOutlined />,
+          icon: <FileTextOutlined />,
           label: 'Primary entry',
         },
         {
           key: 'file-analysis',
-          icon: <Icons.BarChartOutlined />,
+          icon: <BarChartOutlined />,
           label: 'File analysis',
         },
         {
           key: 'attachment',
-          icon: <Icons.PaperClipOutlined />,
+          icon: <PaperClipOutlined />,
           label: 'Attachment',
         },
       ],
@@ -110,10 +131,11 @@ function App() {
     <Layout className="app-layout">
       <Header className="app-header">
         <div className="app-logo">
-          <Icons.AppstoreOutlined />
-          logflow
+          <AppstoreOutlined />
+          Semibot
         </div>
-
+ 
+        
         {/* Window Controls - Right Side */}
         <div className="window-controls">
           <Button 
@@ -136,26 +158,21 @@ function App() {
       
       <Layout>
         {/* Left Vertical Toolbar */}
-        <Sider className="vertical-toolbar" width={60} collapsible={false}>
-          <Button type="text" icon={<Icons.AppstoreOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<Icons.BuildOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<Icons.FileTextOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<Icons.MessageOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<Icons.BarChartOutlined />} className="toolbar-btn" />
-          <Button type="text" icon={<Icons.CodeOutlined />} className="toolbar-btn" />
+        <Sider className="vertical-toolbar" width={50} collapsible={false}>
+          <Button type="text" icon={<AppstoreOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<BuildOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<FileTextOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<MessageOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<BarChartOutlined />} className="toolbar-btn" />
+          <Button type="text" icon={<CodeOutlined />} className="toolbar-btn" />
         </Sider>
 
         {/* Left Side Panel */}
         <Sider className="side-panel" width={300} collapsible={false}>
           <div className="side-panel-content">
-            <div className="side-panel-header">
-              <Button type="text">OBJECTIVES</Button>
-              <Button type="primary">ASSETS</Button>
-              <Button type="text">1 <Icons.DownOutlined /></Button>
-            </div>
-            
+
             <Input 
-              prefix={<Icons.SearchOutlined />} 
+              prefix={<SearchOutlined />} 
               placeholder="Find..." 
               className="search-input"
             />
