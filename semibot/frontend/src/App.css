@@ -169,3 +169,7 @@
   justify-content: flex-start;
   padding: 24px;
 }
+
+.toolbar-icon {
+font-size: 50px;
+}

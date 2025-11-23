@@ -1,27 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Input, Badge, Button, Card, Tag } from 'antd';
-import {
-  AppstoreOutlined,
-  SearchOutlined,
-  SwapOutlined,
-  BuildOutlined,
-  LinkOutlined,
-  AimOutlined,
-  RightOutlined,
-  DownOutlined,
-  PlayCircleOutlined,
-  SyncOutlined,
-  CloudUploadOutlined,
-  ThunderboltOutlined,
-  CheckCircleOutlined,
-  QuestionCircleOutlined,
-  MessageOutlined,
-  EditOutlined,
-  CodeOutlined,
-  FileTextOutlined,
-  BarChartOutlined,
-  PaperClipOutlined,
-} from '@ant-design/icons';
+import * as Icons from '@ant-design/icons';
 import './App.css';
 
 const { Sider, Content, Header } = Layout;
@@ -54,74 +33,74 @@ function App() {
   const menuItems = [
     {
       key: 'campilation',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Campilation',
     },
     {
       key: 'basic',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Basic',
     },
     {
       key: 'redirections',
-      icon: <DownOutlined />,
+      icon: <Icons.DownOutlined />,
       label: 'Redirections',
       children: [
         {
           key: 'prescribing',
-          icon: <CodeOutlined />,
+          icon: <Icons.CodeOutlined />,
           label: 'Prescribing',
         },
         {
           key: 'swapping',
-          icon: <SwapOutlined />,
+          icon: <Icons.SwapOutlined />,
           label: 'Swapping',
         },
         {
           key: 'building-blocks',
-          icon: <BuildOutlined />,
+          icon: <Icons.BuildOutlined />,
           label: 'Building blocks',
         },
         {
           key: 'magnet-link',
-          icon: <LinkOutlined />,
+          icon: <Icons.LinkOutlined />,
           label: 'Magnet link',
         },
         {
           key: 'retargeting',
-          icon: <AimOutlined />,
+          icon: <Icons.AimOutlined />,
           label: 'Retargeting',
         },
       ],
     },
     {
       key: 'telephony',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Telephony',
     },
     {
       key: 'coding',
-      icon: <RightOutlined />,
+      icon: <Icons.RightOutlined />,
       label: 'Coding',
     },
     {
       key: 'file-managing',
-      icon: <DownOutlined />,
+      icon: <Icons.DownOutlined />,
       label: 'File managing',
       children: [
         {
           key: 'primary-entry',
-          icon: <FileTextOutlined />,
+          icon: <Icons.FileTextOutlined />,
           label: 'Primary entry',
         },
         {
           key: 'file-analysis',
-          icon: <BarChartOutlined />,
+          icon: <Icons.BarChartOutlined />,
           label: 'File analysis',
         },
         {
           key: 'attachment',
-          icon: <PaperClipOutlined />,
+          icon: <Icons.PaperClipOutlined />,
           label: 'Attachment',
         },
       ],
@@ -132,7 +111,7 @@ function App() {
     <Layout className="app-layout">
       <Header className="app-header">
         <div className="app-logo">
-          <AppstoreOutlined />
+          <Icons.AppstoreOutlined />
           Semibot
         </div>
  
@@ -162,41 +141,41 @@ function App() {
         <Sider className="vertical-toolbar" width={56} collapsible={false}>
           <div className="toolbar-column">
             <Button
+            name='homebtn'
               type="text"
-              icon={<AppstoreOutlined />}
+              icon={<Icons.AppstoreOutlined className="toolbar-icon"/>}
               className={`toolbar-btn ${activePage === 'page1' ? 'active' : ''}`}
               onClick={() => setActivePage('page1')}
             />
             <Button
+            name='deskautomationbtn'
               type="text"
-              icon={<BuildOutlined />}
+              icon={<Icons.BuildOutlined className="toolbar-icon"/>}
               className={`toolbar-btn ${activePage === 'page2' ? 'active' : ''}`}
               onClick={() => setActivePage('page2')}
             />
             <Button
+            name='n8nbtn'
               type="text"
-              icon={<FileTextOutlined />}
+              icon={<Icons.PartitionOutlined className="toolbar-icon"/>}
               className={`toolbar-btn ${activePage === 'page3' ? 'active' : ''}`}
               onClick={() => setActivePage('page3')}
             />
             <Button
+            name='schedulebtn'
               type="text"
-              icon={<MessageOutlined />}
+              icon={<Icons.ScheduleOutlined className="toolbar-icon"/>}
               className={`toolbar-btn ${activePage === 'page4' ? 'active' : ''}`}
               onClick={() => setActivePage('page4')}
             />
             <Button
+            name='settingsbtn'
               type="text"
-              icon={<BarChartOutlined />}
+              icon={<Icons.SettingOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page5' ? 'active' : ''}`}
               onClick={() => setActivePage('page5')}
             />
-            <Button
-              type="text"
-              icon={<CodeOutlined />}
-              className={`toolbar-btn ${activePage === 'page6' ? 'active' : ''}`}
-              onClick={() => setActivePage('page6')}
-            />
+    
           </div>
         </Sider>
 
@@ -205,7 +184,7 @@ function App() {
           <div className="side-panel-content">
 
             <Input 
-              prefix={<SearchOutlined />} 
+              prefix={<Icons.SearchOutlined />} 
               placeholder="Find..." 
               className="search-input"
             />
