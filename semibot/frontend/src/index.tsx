@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/reset.css';
-import 'reactflow/dist/style.css';
 
 
 const root = ReactDOM.createRoot(

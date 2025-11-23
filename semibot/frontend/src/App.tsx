@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Layout, Menu, Input, Badge, Button, Card, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Menu, Input, Badge, Button, Card, Tag, Radio } from 'antd';
 import * as Icons from '@ant-design/icons';
 import './App.css';
+import FlowCanvas from "./components/FlowCanvas";
+import { ReactFlowProvider } from '@xyflow/react';
+
 
 const { Sider, Content, Header } = Layout;
 
@@ -13,12 +16,12 @@ interface FlowNodeProps {
   size?: 'sm' | 'md';
 }
 
-const FlowNode: React.FC<FlowNodeProps> = ({ 
-  children, 
-  color = 'purple', 
-  icon, 
-  label, 
-  size = 'md' 
+const FlowNode: React.FC<FlowNodeProps> = ({
+  children,
+  color = 'purple',
+  icon,
+  label,
+  size = 'md'
 }) => (
   <div className={`flow-node flow-node-${color} flow-node-${size}`}>
     {icon}
@@ -29,6 +32,61 @@ const FlowNode: React.FC<FlowNodeProps> = ({
 function App() {
   const [collapsed, setCollapsed] = useState(false);
   const [activePage, setActivePage] = useState<string>('page1');
+
+  // Theme settings state
+  const defaultTheme = {
+    primaryColor: '#1677FF',
+    borderRadius: 6,
+    compact: false,
+    preset: 'default',
+  } as const;
+
+  type ThemeState = {
+    primaryColor: string;
+    borderRadius: number;
+    compact: boolean;
+    preset: string;
+  };
+
+  const [theme, setTheme] = useState<ThemeState>(() => {
+    try {
+      const raw = localStorage.getItem('appTheme');
+      return raw ? JSON.parse(raw) : defaultTheme;
+    } catch (e) {
+      return defaultTheme;
+    }
+  });
+
+  useEffect(() => {
+    applyTheme(theme);
+    try { localStorage.setItem('appTheme', JSON.stringify(theme)); } catch { }
+  }, [theme]);
+
+  function applyTheme(t: ThemeState) {
+    const root = document.documentElement;
+    root.style.setProperty('--primary-color', t.primaryColor);
+    root.style.setProperty('--border-radius', `${t.borderRadius}px`);
+    if (t.compact) root.classList.add('compact'); else root.classList.remove('compact');
+    // small derived variables
+    root.style.setProperty('--primary-color-alpha', hexToRgba(t.primaryColor, 0.12));
+  }
+
+  function hexToRgba(hex: string, alpha = 1) {
+    const h = hex.replace('#', '');
+    const bigint = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  const presets: Record<string, { primaryColor: string; borderRadius: number; compact: boolean }> = {
+    default: { primaryColor: '#1677FF', borderRadius: 6, compact: false },
+    dark: { primaryColor: '#22272B', borderRadius: 6, compact: false },
+    document: { primaryColor: '#17a589', borderRadius: 8, compact: false },
+    blossom: { primaryColor: '#ffb6c1', borderRadius: 10, compact: false },
+    v4: { primaryColor: '#1296db', borderRadius: 6, compact: false },
+  };
 
   const menuItems = [
     {
@@ -114,68 +172,68 @@ function App() {
           <Icons.AppstoreOutlined />
           Semibot
         </div>
- 
-        
+
+
         {/* Window Controls - Right Side */}
         <div className="window-controls">
-          <Button 
-            type="text" 
+          <Button
+            type="text"
             icon={<span className="window-icon">−</span>}
             className="window-btn window-minimize"
           />
-          <Button 
-            type="text" 
+          <Button
+            type="text"
             icon={<span className="window-icon">□</span>}
             className="window-btn window-restore"
           />
-          <Button 
-            type="text" 
+          <Button
+            type="text"
             icon={<span className="window-icon">×</span>}
             className="window-btn window-close"
           />
         </div>
       </Header>
-      
+
       <Layout>
         {/* Left Vertical Toolbar */}
         <Sider className="vertical-toolbar" width={72} collapsible={false}>
           <div className="toolbar-column">
             <Button
-            name='homebtn'
+              name='homebtn'
               type="text"
-              icon={<Icons.AppstoreOutlined className="toolbar-icon"/>}
+              icon={<Icons.AppstoreOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page1' ? 'active' : ''}`}
               onClick={() => setActivePage('page1')}
             />
             <Button
-            name='deskautomationbtn'
+              name='deskautomationbtn'
               type="text"
-              icon={<Icons.BuildOutlined className="toolbar-icon"/>}
+              icon={<Icons.BuildOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page2' ? 'active' : ''}`}
               onClick={() => setActivePage('page2')}
             />
             <Button
-            name='n8nbtn'
+              name='n8nbtn'
               type="text"
-              icon={<Icons.PartitionOutlined className="toolbar-icon"/>}
+              icon={<Icons.PartitionOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page3' ? 'active' : ''}`}
               onClick={() => setActivePage('page3')}
             />
             <Button
-            name='schedulebtn'
+              name='schedulebtn'
               type="text"
-              icon={<Icons.ScheduleOutlined className="toolbar-icon"/>}
+              icon={<Icons.ScheduleOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page4' ? 'active' : ''}`}
               onClick={() => setActivePage('page4')}
             />
             <Button
-            name='settingsbtn'
+              name='settingsbtn'
               type="text"
               icon={<Icons.SettingOutlined className="toolbar-icon" />}
               className={`toolbar-btn ${activePage === 'page5' ? 'active' : ''}`}
               onClick={() => setActivePage('page5')}
             />
-    
+
           </div>
         </Sider>
 
@@ -183,12 +241,12 @@ function App() {
         <Sider className="side-panel" width={300} collapsible={false}>
           <div className="side-panel-content">
 
-            <Input 
-              prefix={<Icons.SearchOutlined />} 
-              placeholder="Find..." 
+            <Input
+              prefix={<Icons.SearchOutlined />}
+              placeholder="Find..."
               className="search-input"
             />
-            
+
             <Menu
               mode="inline"
               defaultSelectedKeys={['primary-entry']}
@@ -198,7 +256,7 @@ function App() {
             />
           </div>
         </Sider>
-        
+
         <Content className="main-content">
           {/* Central canvas: render different widgets depending on activePage */}
           {activePage === 'page1' && (
@@ -212,19 +270,18 @@ function App() {
           )}
 
           {activePage === 'page2' && (
-            <div className="canvas-page">
-              <Card title="Page 2 - Build" style={{ width: 600 }}>
-                <p>This is page 2. Build related widgets go here.</p>
-                <Button type="primary">Run build</Button>
-              </Card>
+            <div className="canvas-page" style={{ width: '100%', height: '100%' }}>
+              <ReactFlowProvider>
+                <FlowCanvas />
+              </ReactFlowProvider>
             </div>
           )}
 
           {activePage === 'page3' && (
-            <div className="canvas-page">
-              <Card title="Page 3 - Documents" style={{ width: 600 }}>
-                <p>List of documents and entries.</p>
-              </Card>
+            <div className="canvas-page" style={{ width: '100%', height: '100%' }}>
+              <ReactFlowProvider>
+                <FlowCanvas />
+              </ReactFlowProvider>
             </div>
           )}
 
@@ -238,8 +295,58 @@ function App() {
 
           {activePage === 'page5' && (
             <div className="canvas-page">
-              <Card title="Page 5 - Analytics" style={{ width: 600 }}>
-                <p>Analytics charts and KPIs.</p>
+              <Card title="Page 5 - Settings" style={{ width: 760 }}>
+                <div style={{ display: 'flex', gap: 24 }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={{ display: 'block', marginBottom: 8 }}>Theme Preset</label>
+                      <div style={{ display: 'flex', gap: 12 }}>
+                        {Object.keys(presets).map((p) => (
+                          <Button
+                            key={p}
+                            onClick={() => setTheme(prev => ({ ...prev, ...presets[p], preset: p }))}
+                            style={{
+                              border: theme.preset === p ? `2px solid var(--primary-color)` : undefined,
+                              padding: 12,
+                              minWidth: 96,
+                              background: theme.preset === p ? 'rgba(0,0,0,0.03)' : undefined,
+                            }}
+                          >
+                            {p}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={{ display: 'block', marginBottom: 8 }}>Primary Color</label>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <input
+                          type="color"
+                          value={theme.primaryColor}
+                          onChange={(e) => setTheme(prev => ({ ...prev, primaryColor: e.target.value, preset: 'custom' }))}
+                          style={{ width: 48, height: 36, border: 'none', padding: 0 }}
+                        />
+                        <Input value={theme.primaryColor} onChange={(e) => setTheme(prev => ({ ...prev, primaryColor: e.target.value }))} />
+                      </div>
+                    </div>
+
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={{ display: 'block', marginBottom: 8 }}>Border Radius</label>
+                      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                        <Input style={{ width: 80 }} value={`${theme.borderRadius}px`} onChange={(e) => {
+                          const v = parseInt(String(e.target.value).replace(/[^0-9]/g, '') || '0', 10);
+                          setTheme(prev => ({ ...prev, borderRadius: Number.isFinite(v) ? v : prev.borderRadius }));
+                        }} />
+                        <input type="range" min={0} max={24} value={theme.borderRadius} onChange={(e) => setTheme(prev => ({ ...prev, borderRadius: Number(e.target.value) }))} />
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+                </div>
               </Card>
             </div>
           )}
