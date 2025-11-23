@@ -138,7 +138,7 @@ function App() {
       
       <Layout>
         {/* Left Vertical Toolbar */}
-        <Sider className="vertical-toolbar" width={56} collapsible={false}>
+        <Sider className="vertical-toolbar" width={72} collapsible={false}>
           <div className="toolbar-column">
             <Button
             name='homebtn'
