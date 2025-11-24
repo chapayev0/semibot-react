@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Input, Badge, Button, Card, Tag, Radio } from 'antd';
+import { Layout, Menu, Input, Badge, Button, Card, Tag, Radio, Carousel, Divider, Segmented } from 'antd';
 import * as Icons from '@ant-design/icons';
 import './App.css';
 import FlowCanvas from "./components/FlowCanvas";
@@ -213,45 +213,21 @@ function App() {
       <Layout>
         {/* Left Vertical Toolbar */}
         <Sider className="vertical-toolbar" width={72} collapsible={false}>
-          <div className="toolbar-column">
-            <Button
-              name='homebtn'
-              type="text"
-              icon={<Icons.AppstoreOutlined className="toolbar-icon" />}
-              className={`toolbar-btn ${activePage === 'page1' ? 'active' : ''}`}
-              onClick={() => setActivePage('page1')}
-            />
-            <Button
-              name='deskautomationbtn'
-              type="text"
-              icon={<Icons.BuildOutlined className="toolbar-icon" />}
-              className={`toolbar-btn ${activePage === 'page2' ? 'active' : ''}`}
-              onClick={() => setActivePage('page2')}
-            />
-            <Button
-              name='n8nbtn'
-              type="text"
-              icon={<Icons.PartitionOutlined className="toolbar-icon" />}
-              className={`toolbar-btn ${activePage === 'page3' ? 'active' : ''}`}
-              onClick={() => setActivePage('page3')}
-            />
-            <Button
-              name='schedulebtn'
-              type="text"
-              icon={<Icons.ScheduleOutlined className="toolbar-icon" />}
-              className={`toolbar-btn ${activePage === 'page4' ? 'active' : ''}`}
-              onClick={() => setActivePage('page4')}
-            />
-            <Button
-              name='settingsbtn'
-              type="text"
-              icon={<Icons.SettingOutlined className="toolbar-icon" />}
-              className={`toolbar-btn ${activePage === 'page5' ? 'active' : ''}`}
-              onClick={() => setActivePage('page5')}
-            />
-
-          </div>
+          <Segmented
+            className="toolbar-segment"
+            orientation="vertical"
+            value={activePage}
+            onChange={(val) => setActivePage(val)}
+            options={[
+              { value: 'page1', icon: <Icons.AppstoreOutlined /> },
+              { value: 'page2', icon: <Icons.BuildOutlined /> },
+              { value: 'page3', icon: <Icons.PartitionOutlined /> },
+              { value: 'page4', icon: <Icons.ScheduleOutlined /> },
+              { value: 'page5', icon: <Icons.SettingOutlined /> },
+            ]}
+          />
         </Sider>
+
 
         {/* Left Side Panel */}
         <Sider className="side-panel" width={300} collapsible={false}>
@@ -276,12 +252,50 @@ function App() {
         <Content className="main-content">
           {/* Central canvas: render different widgets depending on activePage */}
           {activePage === 'page1' && (
-            <div className="canvas-page">
-              <Card title="Page 1 - Overview" style={{ width: 600 }}>
-                <p>This is page 1. Use the toolbar to switch pages.</p>
-                <Tag color="blue">Widget A</Tag>
-                <Tag color="green">Widget B</Tag>
-              </Card>
+            <div className="wiget-page" style={{ display: 'flex', gap: 24, marginBottom: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 24 }}>
+
+                <Card style={{ width: 600 }}>
+                  <p>This is page 1. Use the toolbar to switch pages.</p>
+                  <Tag color="blue">Widget A</Tag>
+                  <Tag color="green">Widget B</Tag>
+                </Card>
+
+                <Card title={<span><Icons.NotificationOutlined /> <Divider orientation="vertical" /> News and Updates</span>} style={{ width: 600 }}>
+                  <Carousel autoplay={{ dotDuration: true }} autoplaySpeed={5000}>
+                    <div>
+                      <h3 >1</h3>
+                    </div>
+                    <div>
+                      <h3 >2</h3>
+                    </div>
+                    <div>
+                      <h3 >3</h3>
+                    </div>
+                    <div>
+                      <h3 >4</h3>
+                    </div>
+                  </Carousel>
+                </Card>
+
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 24 }}>
+                <Card title={<span><Icons.FireOutlined /> <Divider orientation="vertical" /> Start</span>} style={{ width: 450 }}>
+                  <p>This is page 1. Use the toolbar to switch pages.</p>
+                  <Tag color="blue">Widget A</Tag>
+                  <Tag color="green">Widget B</Tag>
+                </Card>
+
+                <Card title={<span><Icons.HistoryOutlined /> <Divider orientation="vertical" /> Recent Files</span>} style={{ width: 450 }}>
+                  <p>This is page 1. Use the toolbar to switch pages.</p>
+                  <Tag color="blue">Widget A</Tag>
+                  <Tag color="green">Widget B</Tag>
+                </Card>
+
+              </div>
+
+
             </div>
           )}
 

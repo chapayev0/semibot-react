@@ -60,6 +60,27 @@
 
 
 /* Vertical Toolbar */
+
+.vertical-toolbar {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.toolbar-segment{
+
+  background-color: none;
+}
+
+.toolbar-segment .ant-segmented-item {
+  padding: 12px;
+}
+
+.toolbar-segment .ant-segmented-item-selected {
+  background-color: #1677ff;
+  color: white;
+}
+
 .vertical-toolbar {
   background: rgba(255, 255, 255, 0.7) !important;
   backdrop-filter: blur(10px);
@@ -204,6 +225,16 @@
   justify-content: flex-start;
   padding: var(--compact-spacing, 12px);
 }
+
+.wiget-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 15px;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
 
 .toolbar-icon {
 font-size: 50px;
