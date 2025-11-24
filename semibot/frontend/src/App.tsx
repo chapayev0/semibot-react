@@ -88,6 +88,19 @@ function App() {
     v4: { primaryColor: '#1296db', borderRadius: 6, compact: false },
   };
 
+  // Window control handlers
+  const handleMinimize = () => {
+    (window as any).electronAPI?.minimize();
+  };
+
+  const handleMaximize = () => {
+    (window as any).electronAPI?.maximize();
+  };
+
+  const handleClose = () => {
+    (window as any).electronAPI?.close();
+  };
+
   const menuItems = [
     {
       key: 'campilation',
@@ -180,16 +193,19 @@ function App() {
             type="text"
             icon={<span className="window-icon">−</span>}
             className="window-btn window-minimize"
+            onClick={handleMinimize}
           />
           <Button
             type="text"
             icon={<span className="window-icon">□</span>}
             className="window-btn window-restore"
+            onClick={handleMaximize}
           />
           <Button
             type="text"
             icon={<span className="window-icon">×</span>}
             className="window-btn window-close"
+            onClick={handleClose}
           />
         </div>
       </Header>
